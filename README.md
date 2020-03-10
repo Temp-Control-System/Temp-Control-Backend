@@ -1,4 +1,4 @@
 # Temp-Control-Backend
 
-simple git test
+just a simple git test
 
