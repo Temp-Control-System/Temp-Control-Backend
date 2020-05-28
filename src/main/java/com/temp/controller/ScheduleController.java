@@ -4,12 +4,12 @@ import com.temp.domain.RoomStatus;
 import com.temp.service.ScheduleService;
 import com.temp.domain.WindSupplyRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class ScheduleController {
     @Autowired
     private ScheduleService scheduleService = null;
