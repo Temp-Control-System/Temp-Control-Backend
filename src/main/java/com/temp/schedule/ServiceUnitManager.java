@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.TreeSet;
 
 interface TemperatureUpdater {
-    static float envTemperature = SystemConfigure.envTemperature;
     public float getChangeValue(ServiceUnit su);
 }
 
@@ -30,9 +29,6 @@ interface CostCalculator{
 @Component
 public class ServiceUnitManager{
     static int totalRoomNum = SystemConfigure.totalRoomNum;
-    static int serviceCapacity = SystemConfigure.serviceCapacity;
-    static int timeSlot = SystemConfigure.timeSlot;
-    static int InitWaitingTime = SystemConfigure.InitWaitingTime;
     @Autowired
     private ServiceRecordRepository serviceRecordRepository = null;
     @Autowired
@@ -81,7 +77,7 @@ public class ServiceUnitManager{
                 case WAITING:
                 case OFF:
                 case STANDBY:
-                    if(envTemperature > su.getTemperature())
+                    if(SystemConfigure.envTemperature > su.getTemperature())
                         delta = 1;
                     else
                         delta = -1;
@@ -123,7 +119,7 @@ public class ServiceUnitManager{
 
     private void startWaiting(ServiceUnit su){
         su.setStatus(SUStatus.WAITING);
-        su.setWaitingTime(InitWaitingTime);
+        su.setWaitingTime(SystemConfigure.InitWaitingTime);
         waitingSUs.add(su);
     }
 
@@ -164,7 +160,7 @@ public class ServiceUnitManager{
 
     private void timeSlotSchedule(){
         // 服务数未满
-        for(int i=runningSUs.size();i<serviceCapacity&&!waitingSUs.isEmpty();i++){
+        for(int i=runningSUs.size();i<SystemConfigure.serviceCapacity&&!waitingSUs.isEmpty();i++){
             ServiceUnit su = waitingSUs.first();
             stopWaiting(su);
             startRunning(su);
@@ -187,7 +183,7 @@ public class ServiceUnitManager{
 
     private void prioritySchedule(ServiceUnit su){
         // 服务数未满
-        if(runningSUs.size()<serviceCapacity){
+        if(runningSUs.size()<SystemConfigure.serviceCapacity){
             startRunning(su);
             return;
         }
@@ -252,7 +248,7 @@ public class ServiceUnitManager{
     }
 
     public synchronized void executePerTimeSlot(){
-        updateSystemStatus(timeSlot);
+        updateSystemStatus(SystemConfigure.timeSlot);
         timeSlotSchedule();
     }
 
