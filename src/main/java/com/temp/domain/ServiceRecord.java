@@ -23,11 +23,12 @@ public class ServiceRecord{
     private Mode mode;
     private float endTemperature;
     private float startTemperature;
+    private float targetTemperature;
     boolean isAchievedTarget;
     public ServiceRecord(){
 
     }
-    public ServiceRecord(int roomId, Wind wind, Date serviceStartTime, int totalCost, int lastTime, Mode mode, float endTemperature, float startTemperature, boolean isAchievedTarget) {
+    public ServiceRecord(int roomId, Wind wind, Date serviceStartTime, int totalCost, int lastTime, Mode mode, float endTemperature, float startTemperature, float targetTemperature,boolean isAchievedTarget) {
         this.roomId = roomId;
         this.wind = wind;
         this.serviceStartTime = serviceStartTime;
@@ -36,6 +37,7 @@ public class ServiceRecord{
         this.mode = mode;
         this.endTemperature = endTemperature;
         this.startTemperature = startTemperature;
+        this.targetTemperature = targetTemperature;
         this.isAchievedTarget = isAchievedTarget;
     }
 
@@ -101,6 +103,14 @@ public class ServiceRecord{
 
     public void setStartTemperature(float startTemperature) {
         this.startTemperature = startTemperature;
+    }
+
+    public float getTargetTemperature() {
+        return targetTemperature;
+    }
+
+    public void setTargetTemperature(float targetTemperature) {
+        this.targetTemperature = targetTemperature;
     }
 
     public boolean isAchievedTarget() {
