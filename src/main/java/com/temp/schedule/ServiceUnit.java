@@ -142,6 +142,7 @@ public class ServiceUnit{
                 getMode(),
                 getTemperature(),
                 startTemperature,
+                getTargetTemperature(),
                 getAchievedTargetNum()==1);
         return sr;
     }
