@@ -8,8 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import java.util.List;
+
+@RestController
 public class ScheduleController {
     @Autowired
     private ScheduleService scheduleService = null;
@@ -28,5 +31,10 @@ public class ScheduleController {
     public RoomStatus takeOff(@RequestParam(value = "roomId")int roomId){
         scheduleService.takeOff(roomId);
         return scheduleService.getRoomStatus(roomId);
+    }
+
+    @RequestMapping(path="/query_all",method= RequestMethod.GET)
+    public List<RoomStatus> getAllRoomStatus(){
+        return scheduleService.getAllRoomStatus();
     }
 }
