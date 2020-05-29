@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ScheduleService {
     @Autowired
@@ -29,4 +31,6 @@ public class ScheduleService {
     public RoomStatus getRoomStatus(int roomId){
         return  serviceUnitManager.getRoomStatus(roomId);
     }
+
+    public List<RoomStatus> getAllRoomStatus() {return serviceUnitManager.getAllRoomStatus(); };
 }
