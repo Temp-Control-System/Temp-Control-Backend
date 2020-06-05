@@ -6,14 +6,18 @@ import com.temp.enums.Wind;
 
 import javax.persistence.*;
 import java.util.Date;
-
+/*
+* 实体类，储存某次请求的信息，用于报表生成
+*/
 @Entity
 public class RequestRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    // 房间号
     @Column(nullable = false)
     private int roomId;
+    // 枚举，亲求类型，关机或使用空调
     @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false)
     RequestType requestType;
@@ -22,6 +26,7 @@ public class RequestRecord {
     @Enumerated(EnumType.ORDINAL)
     private Mode mode;
     private float targetTemperature;
+    // 请求到来的时间
     private Date request_time;
 
     public Integer getId() {

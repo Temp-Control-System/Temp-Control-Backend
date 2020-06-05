@@ -10,14 +10,23 @@ import com.temp.enums.Wind;
 import java.util.Date;
 
 public class ServiceUnit{
+    // ID,与房间ID对应
     private static int curId = 0;
+    // 唤醒边缘
     final private static float margin = SystemConfigure.margin;
+    // 目标温度
     private float startTemperature;
+    // 本次服务累计消费
     private int curServiceCost;
+    // 本次服务持续时间
     private int lastTime;
+    // 本次服务开始时刻
     private Date serviceStartTime;
+    // 等待时间（在等待态才有意义）
     private long waitingTime;
+    // 房间状态
     private RoomStatus roomStatus;
+    // 本次服务是否取得用户目标
     private int achievedTargetNum;
     public ServiceUnit (){
         roomStatus = new RoomStatus();

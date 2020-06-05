@@ -1,5 +1,6 @@
 package com.temp.domain;
 
+import java.util.Date;
 import java.util.List;
 
 public class DetailBill {
@@ -7,6 +8,8 @@ public class DetailBill {
     private int totalCost;
     private int totalServiceTime;
     private int serviceNum;
+    private Date checkInDate;
+    private Date checkOutDate;
     public DetailBill(List<ServiceRecord> serviceRecords) {
         this.serviceRecords = serviceRecords;
         analysis();
@@ -53,5 +56,21 @@ public class DetailBill {
 
     public void setServiceNum(int serviceNum) {
         this.serviceNum = serviceNum;
+    }
+
+    public Date getCheckInDate() {
+        return checkInDate;
+    }
+
+    public void setCheckInDate(Date checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+
+    public Date getCheckOutDate() {
+        return checkOutDate;
+    }
+
+    public void setCheckOutDate(Date checkOutDate) {
+        this.checkOutDate = checkOutDate;
     }
 }

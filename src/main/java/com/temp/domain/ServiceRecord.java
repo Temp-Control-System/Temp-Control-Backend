@@ -12,18 +12,27 @@ public class ServiceRecord{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    // 房间号
     private int roomId;
     @Enumerated(EnumType.ORDINAL)
+    // 风速
     private Wind wind;
+    // 服务开始时间
     @CreatedDate
     private Date serviceStartTime;
+    // 本次服务累计消费
     private int totalCost;
+    // 本次服务持续时间
     private int lastTime;
     @Enumerated(EnumType.ORDINAL)
+    // 本次服务温控模式
     private Mode mode;
+    // 本次服务结束时刻房间温度
     private float endTemperature;
+    // 本次服务开始时刻房间温度
     private float startTemperature;
     private float targetTemperature;
+    // 本次服务是否取得目标
     boolean isAchievedTarget;
     public ServiceRecord(){
 
