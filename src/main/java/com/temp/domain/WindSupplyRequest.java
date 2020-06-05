@@ -4,10 +4,13 @@ import com.temp.enums.Mode;
 import com.temp.enums.Wind;
 
 public class WindSupplyRequest{
-
+    // 房间ID
     private int roomId;
+    // 枚举，风速
     private Wind wind;
+    // 枚举，温控模式
     private Mode mode;
+    // 目标温度
     private float targetTemperature;
 
     public WindSupplyRequest(){

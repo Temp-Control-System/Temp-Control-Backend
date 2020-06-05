@@ -28,12 +28,16 @@ interface CostCalculator{
 
 @Component
 public class ServiceUnitManager{
+    // 房间总数
     static int totalRoomNum = SystemConfigure.totalRoomNum;
+    // 数据库仓库，管理ServiceRecord实体
     @Autowired
     private ServiceRecordRepository serviceRecordRepository = null;
     @Autowired
     private RequestRecordRepository requestRecordRepository =null;
+    // 所有服务单元，每个房间对应一个
     private ServiceUnit[] serviceUnits = new ServiceUnit[totalRoomNum];
+    // 运行队列
     private TreeSet<ServiceUnit> runningSUs = new TreeSet<>((s1, s2)-> {
         if(s1.getWind().ordinal()<s2.getWind().ordinal())
             return -1;
@@ -43,7 +47,7 @@ public class ServiceUnitManager{
         if(k!=0) return k;
         return s1.getRoomStatus().getRoomId() - s2.getRoomStatus().getRoomId();}
     );
-
+    // 等待队列
     private TreeSet<ServiceUnit> waitingSUs = new TreeSet<>((s1,s2)-> {
         if(s1.getWind().ordinal()<s2.getWind().ordinal())
             return 1;
@@ -53,7 +57,7 @@ public class ServiceUnitManager{
         if(k!=0) return k;
         return s1.getRoomStatus().getRoomId() - s2.getRoomStatus().getRoomId();}
     );
-
+    // 消费计算器，通过对它的修改可以修改计费规则
     private CostCalculator costCalculator = new CostCalculator() {
         @Override
         public int getTimeSlotServiceCost(ServiceUnit su) {
@@ -68,7 +72,7 @@ public class ServiceUnitManager{
             return 0;
         }
     };
-
+    // 温度变化计算器
     private TemperatureUpdater temperatureUpdater = new TemperatureUpdater() {
         @Override
         public float getChangeValue(ServiceUnit su) {
