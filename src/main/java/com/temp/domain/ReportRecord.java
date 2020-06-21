@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  * 按天为粒度统计每间房间的数据，用于产生报表
@@ -32,7 +31,7 @@ public class ReportRecord {
     /**
      * 该房间当日使用空调次数
      */
-    int times;
+    int use_times;
 
     /**
      * 该房间当日最常用目标温度（该房间使用时间最长的目标温度）
@@ -60,10 +59,10 @@ public class ReportRecord {
      */
     int totalCost;
 
-    public ReportRecord(int roomId, LocalDate date, int times, float mostFreqTemp, Wind mostFreqWind, int reachTargetTimes, int scheduledTimes, int totalCost) {
+    public ReportRecord(int roomId, LocalDate date, int use_times, float mostFreqTemp, Wind mostFreqWind, int reachTargetTimes, int scheduledTimes, int totalCost) {
         this.roomId = roomId;
         this.date = date;
-        this.times = times;
+        this.use_times = use_times;
         this.mostFreqTemp = mostFreqTemp;
         this.mostFreqWind = mostFreqWind;
         this.reachTargetTimes = reachTargetTimes;

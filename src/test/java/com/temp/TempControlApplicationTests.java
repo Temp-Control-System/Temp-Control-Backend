@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @SpringBootTest
 class TempControlApplicationTests {
 
@@ -16,12 +19,13 @@ class TempControlApplicationTests {
 	ReportService reportService;
 
 	@Test
-	void contextLoads() {
+	void contextLoads() throws Exception{
 		//System.out.println(LocalDate.now());
 		//System.out.println(reportRespository.findMostFreqWindByRoomId(1));
-		reportService.generateDailyReport();
-
-
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd" );
+		Date d1 = dateFormat.parse("2020-05-10");
+		Date d2 = dateFormat.parse("2020-06-30");
+		System.out.println(reportService.getReport(d1, d2));
 	}
 
 }

@@ -3,11 +3,24 @@ package com.temp.repository;
 import com.temp.domain.ReportRecord;
 import com.temp.enums.Wind;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.Temporal;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
+import javax.persistence.TemporalType;
+import java.util.Date;
 import java.util.List;
 
 public interface ReportRecordRespository extends CrudRepository<ReportRecord, Integer> {
+
+    /**
+     * 根据起止日期获取报表
+     */
+    @Query(nativeQuery = true, value = "select room_id,  max(id) id, max(date) date, avg(use_times) use_times, avg(most_freq_temp) most_freq_temp, avg(most_freq_wind) most_freq_wind, avg(reach_target_times) reach_target_times, avg(scheduled_times) scheduled_times, avg(total_cost) total_cost\n" +
+            "from report_record \n" +
+            "where date between ?1 and ?2 \n" +
+            "group by room_id")
+    List<ReportRecord> getReport(Date startDate, Date endDate);
 
     /**
      * 当日所有发出请求的 roomId
