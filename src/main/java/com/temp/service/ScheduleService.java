@@ -20,7 +20,7 @@ public class ScheduleService {
     private ServiceUnitManager serviceUnitManager  = null;
 
     // 时间片调度，定时执行一次
-    @Scheduled(fixedRate = SystemConfigure.timeSlot * 1000)
+    @Scheduled(fixedRate = SystemConfigure.timeSlot / 3 * 1000)
     public void timeSlotSchedule(){
         serviceUnitManager.executePerTimeSlot();
     }

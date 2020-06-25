@@ -31,9 +31,11 @@ public class ServiceUnit{
     public ServiceUnit (){
         roomStatus = new RoomStatus();
         roomStatus.setRoomId(curId++);
-        roomStatus.setTemperature(SystemConfigure.envTemperature);
+        roomStatus.setTemperature(RoomConfigure.getInitRoomTemperature(roomStatus.getRoomId()));
+        roomStatus.setTargetTemperature(SystemConfigure.defaultTargetTemperature);
         roomStatus.setStatus(SUStatus.OFF);
         roomStatus.setMode(Mode.REFRIGERATION);
+        roomStatus.setWind(SystemConfigure.DefaultWind);
     }
 
     public int getCurServiceCost() {
