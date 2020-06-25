@@ -81,7 +81,7 @@ public class ServiceUnitManager{
                 case WAITING:
                 case OFF:
                 case STANDBY:
-                    if(SystemConfigure.envTemperature > su.getTemperature())
+                    if(RoomConfigure.getInitRoomTemperature(su.getRoomStatus().getRoomId()) > su.getTemperature())
                         delta = 1;
                     else
                         delta = -1;
@@ -248,7 +248,12 @@ public class ServiceUnitManager{
                 stopWaiting(su);
                 break;
         }
+        // 关机后设置恢复为缺省值
         su.setStatus(SUStatus.OFF);
+        su.setWind(SystemConfigure.DefaultWind);
+        su.setTargetTemperature(SystemConfigure.defaultTargetTemperature);
+        // 房间恢复为初始温度，此语句只在测试时执行，实际上而言，并不会立即恢复成初始温度
+        su.setTemperature(RoomConfigure.getInitRoomTemperature(roomId));
     }
 
     public synchronized void executePerTimeSlot(){
